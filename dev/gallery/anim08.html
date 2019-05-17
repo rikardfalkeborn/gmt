@@ -1,0 +1,189 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>(8) One year (2018) of Pacific seismicity events &#8212; GMT 6.0.0_c727627_2019.05.16 documentation</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+
+
+    <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../_static/searchtools.js"></script>
+    <script type="text/javascript" src="../../_static/rtd-sidebar.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Users Script Contributions" href="../Users_contrib_script.html" />
+    <link rel="prev" title="(7) Spinning Earth showing crustal ages" href="anim07.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Users_contrib_script.html" title="Users Script Contributions"
+             accesskey="N">next</a> </li>
+        <li class="right" >
+          <a href="anim07.html" title="(7) Spinning Earth showing crustal ages"
+             accesskey="P">previous</a> </li>
+  <li><a href="/projects/gmt/wiki/Documentation">Project Home</a>  &#187;</li>
+  
+        <li class="nav-item nav-item-0"><a href="../index.html">GMT 6.0.0_c727627_2019.05.16 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../Gallery.html" accesskey="U">The GMT historical collection</a> &#187;</li>
+<li class="right">
+<form class="search" accept-charset="UTF-8" action="search.html" method="get">
+  <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"></div>
+  <label for="q">
+    <a class="search" href="search.html" accesskey="s" original-title="">Search:</a>
+  </label>
+  <input accesskey="f" class="small" id="q" name="q" size="20" type="text">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form></li>
+   
+
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="one-year-2018-of-pacific-seismicity-events">
+<span id="anim-08"></span><h1>(8) One year (2018) of Pacific seismicity events<a class="headerlink" href="#one-year-2018-of-pacific-seismicity-events" title="Permalink to this headline">¶</a></h1>
+<p>Here we wish to focus on how to plot events, i.e., symbols
+that should be visible for a finite (or infinite) timespan
+depending on what they represent.  We obtain one year (2018)
+of magnitude 5 or higher seismicity and make a daily movie,
+highlighting new quakes as they appear and let them shrink and
+darken a few days after the event.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+<span class="c1">#               GMT ANIMATION 08</span>
+<span class="c1">#</span>
+<span class="c1"># Purpose:      Show one year (2018) of Pacific seismicity events</span>
+<span class="c1"># GMT modules:  convert, math, makecpt, movie, coast, plot, events</span>
+<span class="c1"># Unix progs:   cat</span>
+<span class="c1"># Note:         Run with any argument to build movie; otherwise one frame is plotted only.</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>   <span class="c1"># Just make master PostScript frame 100</span>
+        <span class="nv">opt</span><span class="o">=</span><span class="s2">&quot;-M100,ps -Fnone&quot;</span>
+        <span class="nv">ps</span><span class="o">=</span>anim_08.ps
+<span class="k">else</span>    <span class="c1"># Make both movie formats and a thumbnail animated GIF using every 5th frame</span>
+        <span class="nv">opt</span><span class="o">=</span><span class="s2">&quot;-Fmp4 -Fwebm -A+l+s5&quot;</span>
+<span class="k">fi</span>
+<span class="c1"># Test reading directly from URL</span>
+<span class="c1"># Note: The URL tends to change every few years...</span>
+<span class="c1"># 1. Extract 2018 data from URL and prepare inputs and frame times</span>
+cat <span class="s">&lt;&lt; EOF &gt; pre.sh</span>
+<span class="s">SITE=&quot;https://earthquake.usgs.gov/fdsnws/event/1/query.csv&quot;</span>
+<span class="s">TIME=&quot;starttime=2018-01-01%2000:00:00&amp;endtime=2018-12-31%2000:00:00&quot;</span>
+<span class="s">MAG=&quot;minmagnitude=5&quot;</span>
+<span class="s">ORDER=&quot;orderby=time-asc&quot;</span>
+<span class="s">URL=&quot;\${SITE}?\${TIME}&amp;\${MAG}&amp;\${ORDER}&quot;</span>
+<span class="s">gmt convert \$URL -i2,1,3,4+s50,0 -hi1 &gt; q.txt</span>
+<span class="s">gmt makecpt -Cred,green,blue -T0,70,300,10000 &gt; q.cpt</span>
+<span class="s">gmt math -T2018-01-01T/2018-12-31T/2 --TIME_UNIT=d TNORM 40 MUL 200 ADD = times.txt</span>
+<span class="s">EOF</span>
+<span class="c1"># 2. Set up main script</span>
+cat <span class="s">&lt;&lt; EOF &gt; main.sh</span>
+<span class="s">gmt begin</span>
+<span class="s">	gmt coast -Rg -JG\${MOVIE_COL1}/5/6i -G128 -S32 -X0 -Y0 -A500</span>
+<span class="s">	gmt plot @ridge.txt -W0.5p,darkyellow</span>
+<span class="s">	gmt events q.txt -SE- -Cq.cpt --TIME_UNIT=d -T\${MOVIE_COL0} -Es+r2+d6 -Ms5+c0.5 -Mi1+c-0.6 -Mt+c0</span>
+<span class="s">gmt end</span>
+<span class="s">EOF</span>
+<span class="c1"># 3. Run the movie</span>
+gmt movie main.sh -Sbpre.sh -C6ix6ix100 -Ttimes.txt -Nanim_08 -Gblack -H2 -Lc1 --FONT_TAG<span class="o">=</span>20p,Helvetica,white --FORMAT_CLOCK_MAP<span class="o">=</span>- <span class="nv">$opt</span>
+rm -rf main.sh pre.sh
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/anim_08.png"><img alt="../_images/anim_08.png" src="../_images/anim_08.png" style="width: 0px;" /></a>
+<div class="figure align-center">
+  <video width="720" height="480" poster="../_images/anim_08.png" controls>
+    <source src="../_static/anim_08.mp4" type="video/mp4">
+    <source src="../_static/anim_08.webm" type="video/webm">
+    Your browser does not support the video tag.
+  </video>
+  <p class="caption">One year (2018) of Pacific seismicity events.</p>
+</div></div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="anim07.html"
+                        title="previous chapter">(7) Spinning Earth showing crustal ages</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Users_contrib_script.html"
+                        title="next chapter">Users Script Contributions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/gallery/anim08.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Users_contrib_script.html" title="Users Script Contributions"
+             >next</a> </li>
+        <li class="right" >
+          <a href="anim07.html" title="(7) Spinning Earth showing crustal ages"
+             >previous</a> </li>
+  <li><a href="/projects/gmt/wiki/Documentation">Project Home</a>  &#187;</li>
+  
+        <li class="nav-item nav-item-0"><a href="../index.html">GMT 6.0.0_c727627_2019.05.16 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../Gallery.html" >The GMT historical collection</a> &#187;</li>
+<li class="right">
+<form class="search" accept-charset="UTF-8" action="search.html" method="get">
+  <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"></div>
+  <label for="q">
+    <a class="search" href="search.html" accesskey="s" original-title="">Search:</a>
+  </label>
+  <input accesskey="f" class="small" id="q" name="q" size="20" type="text">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form></li>
+   
+
+      </ul>
+    </div>
+<div class="footer">
+    &copy; Copyright 2019, P. Wessel, W. H. F. Smith, R. Scharroo, J. Luis, and F. Wobbe.
+  Last updated on May 17, 2019.
+  Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.
+  <br />Theme based on <a href="http://readthedocs.org/">Read The Docs</a>
+
+</div>
+
+
+  </body>
+</html>

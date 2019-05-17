@@ -1,0 +1,416 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>events &#8212; GMT 6.0.0_c727627_2019.05.16 documentation</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+
+
+    <link rel="stylesheet" href="_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/searchtools.js"></script>
+    <script type="text/javascript" src="_static/rtd-sidebar.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="grdimage" href="grdimage.html" />
+    <link rel="prev" title="contour" href="contour.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="grdimage.html" title="grdimage"
+             accesskey="N">next</a> </li>
+        <li class="right" >
+          <a href="contour.html" title="contour"
+             accesskey="P">previous</a> </li>
+  <li><a href="/projects/gmt/wiki/Documentation">Project Home</a>  &#187;</li>
+  
+        <li class="nav-item nav-item-0"><a href="index.html">GMT 6.0.0_c727627_2019.05.16 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="PS.html" accesskey="U">Modern Mode Mapping</a> &#187;</li>
+<li class="right">
+<form class="search" accept-charset="UTF-8" action="search.html" method="get">
+  <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"></div>
+  <label for="q">
+    <a class="search" href="search.html" accesskey="s" original-title="">Search:</a>
+  </label>
+  <input accesskey="f" class="small" id="q" name="q" size="20" type="text">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form></li>
+   
+
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="events">
+<span id="index-0"></span><h1>events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h1>
+<p>Plot event symbols and labels for a moment in time</p>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p><strong>gmt events</strong> [ <em>table</em> ] <a class="reference internal" href="#j"><span> <strong>-J</strong></span></a></strong><em>parameters</em> <a class="reference internal" href="#r"><span> <strong>-R</strong></span></a></strong><em>west</em>/<em>east</em>/<em>south</em>/<em>north</em>[/<em>zmin</em>/<em>zmax</em>][<strong>+r</strong>] <a class="reference internal" href="#s"><span> <strong>-S</strong></span></a></strong><em>symbol</em>[<em>size</em>[<em>units</em>]]
+[ <a class="reference internal" href="#b"><span> <strong>-B</strong></span></a></strong>[<strong>p</strong>|<strong>s</strong>]<em>parameters</em> ]
+[ <a class="reference internal" href="#c"><span> <strong>-C</strong></span></a></strong><em>cpt</em> ]
+[ <a class="reference internal" href="#d"><span> <strong>-D</strong></span></a></strong>[<strong>j</strong>|<strong>J</strong>]<em>dx</em>[/<em>dy</em>][<strong>+v</strong>[<em>pen</em>]] ]
+[ <a class="reference internal" href="#e"><span> <strong>-E</strong></span></a></strong><strong>s</strong>|<strong>t</strong>[<strong>+o</strong>|<strong>O</strong><em>dt</em>][<strong>+r</strong><em>dt</em>][<strong>+p</strong><em>dt</em>][<strong>+d</strong><em>dt</em>][<strong>+f</strong><em>dt</em>] ]
+[ <a class="reference internal" href="#f"><span> <strong>-F</strong></span></a></strong>[<strong>+a</strong><em>angle</em>][<strong>+f</strong><em>font</em>][<strong>+j</strong><em>justify</em>][<strong>+r</strong>[<em>first</em>]|<strong>+z</strong>[<em>format</em>]] ]
+[ <a class="reference internal" href="#g"><span> <strong>-G</strong></span></a></strong><em>color</em> ]
+[ <a class="reference internal" href="#l"><span> <strong>-L</strong></span></a></strong>[<em>length</em>|<strong>t</strong>] ]
+[ <a class="reference internal" href="#m"><span> <strong>-M</strong></span></a></strong><strong>i</strong>|<strong>s</strong>|<strong>t</strong>[<em>val1</em>][<strong>+c</strong><em>val2</em>] ]
+[ <a class="reference internal" href="#q"><span> <strong>-Q</strong></span></a></strong><em>prefix</em> ]
+[ <a class="reference internal" href="#v"><span> <strong>-V</strong></span></a></strong>[<em>level</em>] ]
+[ <a class="reference internal" href="#w"><span> <strong>-W</strong></span></a></strong><em>pen</em> ]
+[ <a class="reference internal" href="#u"><span> <strong>-U</strong></span></a></strong>[<em>stamp</em>] ]
+[ <a class="reference internal" href="#w"><span> <strong>-W</strong></span></a></strong><em>pen</em> ]
+[ <a class="reference internal" href="#x"><span> <strong>-X</strong></span></a></strong>[<strong>a</strong>|<strong>c</strong>|<strong>f</strong>|<strong>r</strong>][<em>xshift</em>[<strong>u</strong>]] ]
+[ <a class="reference internal" href="#y"><span> <strong>-Y</strong></span></a></strong>[<strong>a</strong>|<strong>c</strong>|<strong>f</strong>|<strong>r</strong>][<em>yshift</em>[<strong>u</strong>]] ]
+[ <strong>-bi</strong><a class="reference internal" href="gmt.html#bi-full"><span class="std std-ref">binary</span></a> ]
+[ <strong>-di</strong><a class="reference internal" href="gmt.html#di-full"><span class="std std-ref">nodata</span></a> ]
+[ <strong>-e</strong><a class="reference internal" href="gmt.html#e-full"><span class="std std-ref">regexp</span></a> ]
+[ <strong>-f</strong><a class="reference internal" href="gmt.html#f-full"><span class="std std-ref">flags</span></a> ]
+[ <strong>-h</strong><a class="reference internal" href="gmt.html#h-full"><span class="std std-ref">headers</span></a> ]
+[ <strong>-i</strong><a class="reference internal" href="gmt.html#icols-full"><span class="std std-ref">flags</span></a> ]
+[ <strong>-p</strong><a class="reference internal" href="gmt.html#perspective-full"><span class="std std-ref">flags</span></a> ]
+[ <strong>-:</strong>[<strong>i</strong>|<strong>o</strong>] ]
+[ <strong>--PAR</strong>=<em>value</em> ]</p>
+<p><strong>Note:</strong> No space is allowed between the option flag and the associated arguments.</p>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>Reads (<em>x</em>, <em>y</em>[, <em>z</em>] [, <em>size</em>], <em>time</em> [, <em>length</em>]) data from files [or standard
+input] and plots how the symbol for each event should look for the specified <em>now</em> time.
+The reason they may differ is that events may have different lengths and we may
+wish to accentuate the symbol attributes in ways to draw attention to an event when
+it first happens and perhaps tone it down after a while to reduce clutter and focus
+on more recent events. This module is typically used in conjunction with movie scripts
+where the implicit loop over time is used to call it over a time-sequence and
+thus plot symbols as events unfold.</p>
+</div>
+<div class="section" id="required-arguments">
+<h2>Required Arguments<a class="headerlink" href="#required-arguments" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils" id="j">
+<dt><strong>-J</strong><em>parameters</em> <a class="reference internal" href="gmt.html#j-full"><span class="std std-ref">(more …)</span></a></dt>
+<dd>Select map projection.  </dd>
+</dl>
+<dl class="docutils" id="r">
+<dt><strong>-R</strong><em>xmin</em>/<em>xmax</em>/<em>ymin</em>/<em>ymax</em>[<strong>+r</strong>][<strong>+u</strong><em>unit</em>] <a class="reference internal" href="gmt.html#r-full"><span class="std std-ref">(more …)</span></a></dt>
+<dd>Specify the region of interest.  </dd>
+</dl>
+<p>For perspective view <strong>p</strong>, optionally append /<em>zmin</em>/<em>zmax</em>. <a class="reference internal" href="gmt.html#rz-full"><span class="std std-ref">(more …)</span></a>  </p>
+<dl class="docutils" id="s">
+<dt><strong>-S</strong><em>symbol</em>[<em>size</em>[<em>units</em>]]</dt>
+<dd>Specify the symbol to use for the event.  Optionally, append symbol <em>size</em> with units from
+(<strong>c</strong>|<strong>i</strong>|<strong>p</strong>).  If no <em>size</em> is given then we read an event-specific size
+from the data file’s third column (fourth if <strong>-C</strong> is used). Note: Not all the symbols that
+are available in <a class="reference internal" href="psxy.html"><span class="doc">psxy</span></a> can be used here.  At the moment we only support the basic
+symbols and custom symbols; bars, vectors, ellipses, fronts, decorated and quoted lines cannot
+be specified.</dd>
+</dl>
+<dl class="docutils" id="t">
+<dt><strong>-T</strong><em>now</em></dt>
+<dd>Sets the current plot time.  If absolute times are used you must also use <strong>-fT</strong>.</dd>
+</dl>
+</div>
+<div class="section" id="optional-arguments">
+<h2>Optional Arguments<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><em>table</em></dt>
+<dd>One or more ASCII (or binary, see <strong>-bi</strong>[<em>ncols</em>][<em>type</em>]) data
+table file(s) holding a number of data columns. If no tables are given
+then we read from standard input.  </dd>
+</dl>
+<dl class="docutils" id="b">
+<dt><strong>-B</strong>[<strong>p</strong>|<strong>s</strong>]<em>parameters</em> <a class="reference internal" href="gmt.html#b-full"><span class="std std-ref">(more …)</span></a></dt>
+<dd>Set map boundary frame and axes attributes.</dd>
+</dl>
+<dl class="docutils" id="c">
+<dt><strong>-C</strong><em>cpt</em></dt>
+<dd>Use the <em>cpt</em> to convert <em>z</em> values given in the optional third column to assign symbol colors.</dd>
+</dl>
+<dl class="docutils" id="d">
+<dt><strong>-D</strong>[<strong>j</strong>|<strong>J</strong>]<em>dx</em>[/<em>dy</em>][<strong>+v</strong>[<em>pen</em>]]</dt>
+<dd>Offsets the text from the projected (<em>x</em>,<em>y</em>) point by <em>dx</em>,<em>dy</em>
+[0/0]. If <em>dy</em> is not specified then it is set equal to <em>dx</em>. Use
+<strong>-Dj</strong> to offset the text away from the point instead (i.e., the
+text justification will determine the direction of the shift). Using
+<strong>-DJ</strong> will shorten diagonal offsets at corners by
+sqrt(2). Optionally, append <strong>+v</strong> which will draw
+a line from the original point to the shifted point; append a <em>pen</em>
+to change the attributes for this line.</dd>
+</dl>
+<dl class="docutils" id="e">
+<dt><strong>Es</strong>|<strong>t</strong>[<strong>+o</strong>|<strong>O</strong><em>dt</em>][<strong>+r</strong><em>dt</em>][<strong>+p</strong><em>dt</em>][<strong>+d</strong><em>dt</em>][<strong>+f</strong><em>dt</em>]</dt>
+<dd>Sets the time knots for the <strong>s</strong>ymbol or <strong>t</strong>ext time-functions.  Append
+<strong>+o</strong> to shift the event start and end times by a constant offset (basically shifting
+the event in time by <em>dt</em>; or use <strong>O</strong> to only shift the start time, effectively shortening
+the duration of the event), <strong>+r</strong> to indicate the
+duration of the rise phase, <strong>+p</strong> to set the duration of the plateau phase, <strong>+d</strong>
+tp specify the duration of the decay phase, and <strong>+f</strong> to set the duration of the
+fade phase.  These are all optional, and can be set separately for symbols and texts.
+if neither <strong>s</strong> or <strong>t</strong> is given then we set the time knots for both features.</dd>
+</dl>
+<dl class="docutils" id="f">
+<dt><strong>-F</strong>[<strong>+a</strong><em>angle</em>][<strong>+f</strong><em>font</em>][<strong>+j</strong><em>justify</em>][<strong>+r</strong>[<em>first</em>] |<strong>+z</strong>[<em>format</em>]]</dt>
+<dd>By default, event label text will be placed horizontally, using the primary
+annotation font attributes (<a class="reference internal" href="gmt.conf.html#font-annot-primary"><span class="std std-ref">FONT_ANNOT_PRIMARY</span></a>), and centered
+on the data point. Use this option to override these defaults by specifying up to three
+text attributes (font, angle, and justification) directly on the command line. Use <strong>+f</strong>
+to set the font (size,fontname,color), <strong>+a</strong> to set the angle, and <strong>+j</strong> to set the justification.
+Normally, the text to be plotted is the trailing text.  Instead, use <strong>+r</strong> to use the
+record number (counting up from <em>first</em> [0]) or <strong>+z</strong> to format incoming <em>z</em> values (requires <strong>-C</strong>)
+to a string using the supplied <em>format</em> [use FORMAT_FLOAT_MAP].</dd>
+</dl>
+<dl class="docutils" id="g">
+<dt><strong>-G</strong><em>fill</em> <a class="reference internal" href="GMT_Docs_classic.html#gfill-attrib"><span class="std std-ref">(more …)</span></a></dt>
+<dd>Set constant shade or color for all symbols.</dd>
+</dl>
+<dl class="docutils">
+<dt><strong>-Jz</strong>|<strong>Z</strong><em>parameters</em> <a class="reference internal" href="gmt.html#jz-full"><span class="std std-ref">(more …)</span></a></dt>
+<dd>Set z-axis scaling; same syntax as <strong>-Jx</strong>.</dd>
+</dl>
+<dl class="docutils" id="l">
+<dt><strong>-L</strong>[<em>length</em>|<strong>t</strong>]</dt>
+<dd>Specify the length of the event.  Append a <em>length</em> if all events have the same length,
+append <strong>t</strong> if end-times instead of lengths are given in the file after the <em>time</em> column,
+or leave blank if lengths can be read from the input file after the <em>time</em> column.</dd>
+</dl>
+<dl class="docutils" id="m">
+<dt><strong>-M</strong><strong>i</strong>|<strong>s</strong>|<strong>t</strong>[<em>val1</em>][<strong>+c</strong><em>val2</em>]</dt>
+<dd>Sets the initial <strong>i</strong>ntensity, <strong>s</strong>ize magnification, or <strong>t</strong>ransparency of the symbol during
+the <em>rise</em> interval [1, 1, and 100, respectively].
+Optionally, use <strong>+c</strong> to set the corresponding terminal value during the coda [100].</dd>
+</dl>
+<dl class="docutils" id="q">
+<dt><strong>-Q</strong><em>prefix</em></dt>
+<dd>Save the intermediate event symbols and labels to permanent files instead of removing when done.
+Files will be called <em>prefix</em>_symbols.txt and <em>prefix</em>_labels.txt.</dd>
+</dl>
+<dl class="docutils" id="u">
+<dt><strong>-U</strong>[<em>label</em>][<strong>+c</strong>][<strong>+j</strong><em>just</em>][<strong>+o</strong><em>dx</em>/<em>dy</em>] <a class="reference internal" href="gmt.html#u-full"><span class="std std-ref">(more …)</span></a></dt>
+<dd>Draw GMT time stamp logo on plot.</dd>
+</dl>
+<dl class="docutils" id="id1">
+<dt><strong>-V</strong>[<em>level</em>] <a class="reference internal" href="gmt.html#v-full"><span class="std std-ref">(more …)</span></a></dt>
+<dd>Select verbosity level [c].  </dd>
+</dl>
+<dl class="docutils" id="w">
+<dt><strong>-W</strong><em>pen</em></dt>
+<dd>Specify symbol outline pen attributes [Default is no outline].</dd>
+</dl>
+<dl class="docutils">
+<dt><strong>-bi</strong>[<em>ncols</em>][<strong>t</strong>] <a class="reference internal" href="gmt.html#bi-full"><span class="std std-ref">(more …)</span></a></dt>
+<dd>Select native binary format for primary input. [Default is 3 input columns].</dd>
+</dl>
+<dl class="docutils">
+<dt><strong>-di</strong><em>nodata</em> <a class="reference internal" href="gmt.html#di-full"><span class="std std-ref">(more …)</span></a></dt>
+<dd>Replace input columns that equal <em>nodata</em> with NaN.  </dd>
+</dl>
+<dl class="docutils">
+<dt><strong>-e</strong>[<strong>~</strong>]<em>”pattern”</em> <strong>|</strong> <strong>-e</strong>[<strong>~</strong>]/<em>regexp</em>/[<strong>i</strong>] <a class="reference internal" href="gmt.html#e-full"><span class="std std-ref">(more …)</span></a></dt>
+<dd>Only accept data records that match the given pattern.  </dd>
+</dl>
+<dl class="docutils">
+<dt><strong>-f</strong>[<strong>i</strong>|<strong>o</strong>]<em>colinfo</em> <a class="reference internal" href="gmt.html#f-full"><span class="std std-ref">(more …)</span></a></dt>
+<dd>Specify data types of input and/or output columns.  </dd>
+</dl>
+<dl class="docutils">
+<dt><strong>-h</strong>[<strong>i</strong>|<strong>o</strong>][<em>n</em>][<strong>+c</strong>][<strong>+d</strong>][<strong>+r</strong><em>remark</em>][<strong>+r</strong><em>title</em>] <a class="reference internal" href="gmt.html#h-full"><span class="std std-ref">(more …)</span></a></dt>
+<dd>Skip or produce header record(s).  </dd>
+</dl>
+<dl class="docutils">
+<dt><strong>-i</strong><em>cols</em>[<strong>+l</strong>][<strong>+s</strong><em>scale</em>][<strong>+o</strong><em>offset</em>][,<em>…</em>] <a class="reference internal" href="gmt.html#icols-full"><span class="std std-ref">(more …)</span></a></dt>
+<dd>Select input columns and transformations (0 is first column).</dd>
+</dl>
+<dl class="docutils">
+<dt><strong>-p</strong>[<strong>x</strong>|<strong>y</strong>|<strong>z</strong>]<em>azim</em>[/<em>elev</em>[/<em>zlevel</em>]][<strong>+w</strong><em>lon0</em>/<em>lat0</em>[/<em>z0</em>]][<strong>+v</strong><em>x0</em>/<em>y0</em>] <a class="reference internal" href="gmt.html#perspective-full"><span class="std std-ref">(more …)</span></a></dt>
+<dd>Select perspective view.  </dd>
+</dl>
+<dl class="docutils">
+<dt><strong>-:</strong>[<strong>i</strong>|<strong>o</strong>] <a class="reference internal" href="gmt.html#colon-full"><span class="std std-ref">(more …)</span></a></dt>
+<dd>Swap 1st and 2nd column on input and/or output.</dd>
+</dl>
+<dl class="docutils">
+<dt><strong>-^</strong> or just <strong>-</strong></dt>
+<dd>Print a short message about the syntax of the command, then exits (NOTE: on Windows just use <strong>-</strong>).</dd>
+<dt><strong>-+</strong> or just <strong>+</strong></dt>
+<dd>Print an extensive usage (help) message, including the explanation of
+any module-specific option (but not the GMT common options), then exits.</dd>
+<dt><strong>-?</strong> or no arguments</dt>
+<dd>Print a complete usage (help) message, including the explanation of all options, then exits.</dd>
+<dt><strong>--PAR</strong>=<em>value</em></dt>
+<dd>Temporarily override a GMT default setting; repeatable. See <a class="reference internal" href="gmt.conf.html"><span class="doc">gmt.conf</span></a> for parameters.</dd>
+</dl>
+</div>
+<div class="section" id="the-three-time-functions">
+<h2>The three time-functions<a class="headerlink" href="#the-three-time-functions" title="Permalink to this headline">¶</a></h2>
+<p>Events typically have either a finite length, e.g., the temporal extent of
+the reign of a particular monarch, or are infinite.  Here, infinite simply means
+its length exceeds the temporal extent of the time we are plotting.  In a movie,
+a basic representation of these events as points on a map would be to start plotting
+the symbol when the event starts and then keep the symbol visible on all frames until the
+event ends (or never stop plotting them in the infinite length case).  However, to draw
+attention to the arrival of a new event we can temporarily change three aspects of
+the symbol: Its size, color intensity, and transparency.  You can think of these three
+attributes as functions of time.  For some option settings, Figure <a class="reference internal" href="psevents.html#psevents-size"><span class="std std-ref">Symbol size function</span></a>
+illustrates how the symbol size may vary through the timespan of the movie.</p>
+<div class="figure align-center" id="id2">
+<span id="psevents-size"></span><a class="reference internal image-reference" href="_images/psevents_size.png"><img alt="_images/psevents_size.png" src="_images/psevents_size.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text">Implied evolution of one symbol’s size-variation as a function of time
+given the time-knots from <strong>-Es</strong> and the magnifications from <strong>-Ms</strong>.
+Here we temporarily magnify the symbol size five times before decaying
+to the intended size and eventually shrink it further down to a small
+size during the fade and coda phases.</span></p>
+</div>
+<p>Similarly, to draw attention to the newly arrived event you may want to whiten the color
+temporarily; this can be done via the <strong>-I</strong> option and Figure <a class="reference internal" href="psevents.html#psevents-intensity"><span class="std std-ref">Symbol intensity function</span></a>
+illustrates how intensity may vary accordingly.</p>
+<div class="figure align-center" id="id3">
+<span id="psevents-intensity"></span><a class="reference internal image-reference" href="_images/psevents_intensity.png"><img alt="_images/psevents_intensity.png" src="_images/psevents_intensity.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text">Implied evolution of one symbol’s color intensity as a function of time
+given the time-knots from <strong>-Es</strong> and the intensities from <strong>-Mi</strong>.  Here we
+seek to whiten the symbol during the event arrival, as well as darken it
+during a permanent code phase.</span></p>
+</div>
+<p>Finally, for finite events you may wish to either fade them out completely or
+simply fade them to a constant but still visible transparency; this future stage
+is referred to as the coda and levels can be specified via the <strong>-Mt</strong> option.
+Figure <a class="reference internal" href="psevents.html#psevents-transparency"><span class="std std-ref">Symbol transparency function</span></a>
+illustrates how transparency may vary through time.</p>
+<div class="figure align-center" id="id4">
+<span id="psevents-transparency"></span><a class="reference internal image-reference" href="_images/psevents_transparency.png"><img alt="_images/psevents_transparency.png" src="_images/psevents_transparency.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text">Here we show how a symbol may go from being invisible to reach full opaqueness
+at the event begin time, then finally fade to a near-invisible stage after reaching
+its length.</span></p>
+</div>
+<p>While shown in these examples, the rise, plateau, fade, and coda periods are all optional
+and can be selected or ignored as you wish via <strong>-E</strong>.  You can choose to specify any or none
+of the three time histories.  By default the symbol size is constant, there is no intensity
+variation, and all symbols are opaque.  If trailing text is plotted (requires <strong>-Et</strong>) then
+only a transparency time-function is used.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>To show the display of events visible for May 1, 2018 given the catalog of
+large (&gt;5) magnitude earthquakes that year, using a 2-day rise time during
+which we boost symbol size by a factor of 5 and wash out the color, followed
+by a decay over 6 days and then a final shrinking to half size and darken the
+color, we may try</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gmt</span> <span class="n">begin</span> <span class="n">layer</span>
+  <span class="n">gmt</span> <span class="n">convert</span> <span class="s2">&quot;https://earthquake.usgs.gov/fdsnws/event/1/query.csv?starttime=2018-01-01%2000:00:00&amp;endtime=2018-12-31%2000:00:00&amp;minmagnitude=5&amp;orderby=time-asc&quot;</span> \
+     <span class="o">-</span><span class="n">i2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="o">+</span><span class="n">s50</span><span class="p">,</span><span class="mi">0</span> <span class="o">-</span><span class="n">hi1</span> <span class="o">&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">txt</span>
+  <span class="n">gmt</span> <span class="n">makecpt</span> <span class="o">-</span><span class="n">Cred</span><span class="p">,</span><span class="n">green</span><span class="p">,</span><span class="n">blue</span> <span class="o">-</span><span class="n">T0</span><span class="p">,</span><span class="mi">70</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">10000</span> <span class="o">&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">cpt</span>
+  <span class="n">gmt</span> <span class="n">events</span> <span class="o">-</span><span class="n">Rg</span> <span class="o">-</span><span class="n">JG200</span><span class="o">/</span><span class="mi">5</span><span class="o">/</span><span class="mi">6</span><span class="n">i</span> <span class="o">-</span><span class="n">Baf</span> <span class="n">q</span><span class="o">.</span><span class="n">txt</span> <span class="o">-</span><span class="n">SE</span><span class="o">-</span> <span class="o">-</span><span class="n">Cq</span><span class="o">.</span><span class="n">cpt</span> <span class="o">--</span><span class="n">TIME_UNIT</span><span class="o">=</span><span class="n">d</span> <span class="o">-</span><span class="n">T2018</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">01</span><span class="n">T</span> <span class="o">-</span><span class="n">Es</span><span class="o">+</span><span class="n">r2</span><span class="o">+</span><span class="n">d6</span> <span class="o">-</span><span class="n">Ms5</span><span class="o">+</span><span class="n">c0</span><span class="o">.</span><span class="mi">5</span> <span class="o">-</span><span class="n">Mi1</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="mf">0.6</span> <span class="o">-</span><span class="n">Mt</span><span class="o">+</span><span class="n">c0</span>
+<span class="n">gmt</span> <span class="n">end</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="gmt.html"><span class="doc">gmt</span></a>, <a class="reference internal" href="gmtcolors.html"><span class="doc">gmtcolors</span></a>,
+<a class="reference internal" href="plot.html"><span class="doc">plot</span></a>,
+<a class="reference internal" href="movie.html"><span class="doc">movie</span></a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">events</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#required-arguments">Required Arguments</a></li>
+<li><a class="reference internal" href="#optional-arguments">Optional Arguments</a></li>
+<li><a class="reference internal" href="#the-three-time-functions">The three time-functions</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#see-also">See Also</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="contour.html"
+                        title="previous chapter">contour</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="grdimage.html"
+                        title="next chapter">grdimage</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/events.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="grdimage.html" title="grdimage"
+             >next</a> </li>
+        <li class="right" >
+          <a href="contour.html" title="contour"
+             >previous</a> </li>
+  <li><a href="/projects/gmt/wiki/Documentation">Project Home</a>  &#187;</li>
+  
+        <li class="nav-item nav-item-0"><a href="index.html">GMT 6.0.0_c727627_2019.05.16 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="PS.html" >Modern Mode Mapping</a> &#187;</li>
+<li class="right">
+<form class="search" accept-charset="UTF-8" action="search.html" method="get">
+  <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"></div>
+  <label for="q">
+    <a class="search" href="search.html" accesskey="s" original-title="">Search:</a>
+  </label>
+  <input accesskey="f" class="small" id="q" name="q" size="20" type="text">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form></li>
+   
+
+      </ul>
+    </div>
+<div class="footer">
+    &copy; Copyright 2019, P. Wessel, W. H. F. Smith, R. Scharroo, J. Luis, and F. Wobbe.
+  Last updated on May 17, 2019.
+  Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.
+  <br />Theme based on <a href="http://readthedocs.org/">Read The Docs</a>
+
+</div>
+
+
+  </body>
+</html>
